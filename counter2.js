@@ -4,24 +4,24 @@
  */
 var createCounter = function(init) {
     var output = init;
-    // var lastCalled = null;
+    var lastCalled = null;
 
     return {
         increment: function() {
-            // lastCalled = 'increment';
-            return ++output;
+            lastCalled = 'increment';
+            return output++;
         },
         reset: function() {
-            // lastCalled = 'reset';
+            lastCalled = 'reset';
             return output = init;
         },
         decrement: function() {
-            // lastCalled = 'decrement';
-            return --output;
+            lastCalled = 'decrement';
+            return output--;
         },
-        // getLastCalled: function() {
-            // return lastCalled;
-        // }
+        getLastCalled: function() {
+            return lastCalled;
+        }
     }
 };
 
