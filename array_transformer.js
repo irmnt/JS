@@ -1,21 +1,18 @@
 /**
- * @param {Function[]} functions
+ * @param {Function} fn
  * @return {Function}
  */
-var compose = function(functions) {
-    
-    return function(x) {
-        if (functions.length === 0) return x;
-
-        let result = x;
-        for (let i = functions.length - 1; i >= 0; i--) {
-            result = functions[i](result);
-        }
-
-        return result;        
-    }
+var once = function(fn) {
+    let called = false;
+    return function(...args){
+        if (called) return undefined;
+        called = true;
+        return fn(...args);
+    };
 };
 
+let fn = (a,b,c) => (a + b + c)
+let onceFn = once(fn)
 
-const fn = compose([x => x + 1, x => 2 * x])
-console.log(fn(4));
+console.log(onceFn(1,2,3)); // 6
+console.log(onceFn(2,3,6)); // returns undefined without calling fn
